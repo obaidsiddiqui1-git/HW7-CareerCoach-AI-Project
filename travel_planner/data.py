@@ -1,0 +1,178 @@
+"""Static data and option definitions for the travel planner."""
+from __future__ import annotations
+
+from typing import Dict, List, Set
+
+INTEREST_OPTIONS: List[str] = [
+    "Museums",
+    "Food & Cuisine",
+    "Historic Sites",
+    "Nightlife",
+    "Nature",
+    "Shopping",
+    "Wellness",
+    "Adventure",
+]
+
+GUARDRAIL_OPTIONS: List[str] = [
+    "No walking tours",
+    "Only kids friendly activities",
+    "Only wheelchair accessible places",
+    "Avoid spicy food experiences",
+    "Prefer spicy food experiences",
+    "Budget-friendly only",
+    "Indoor activities only",
+    "Quiet pace focus",
+]
+
+# Guardrail rule definition: activities must include required tags and avoid excluded tags.
+GUARDRAIL_RULES: Dict[str, Dict[str, Set[str]]] = {
+    "No walking tours": {"exclude_tags": {"walking"}},
+    "Only kids friendly activities": {"require_tags": {"family"}},
+    "Only wheelchair accessible places": {"require_tags": {"accessible"}},
+    "Avoid spicy food experiences": {"exclude_tags": {"spicy"}},
+    "Prefer spicy food experiences": {"require_tags": {"spicy"}},
+    "Budget-friendly only": {"require_tags": {"budget"}},
+    "Indoor activities only": {"require_tags": {"indoor"}},
+    "Quiet pace focus": {"exclude_tags": {"high-energy"}},
+}
+
+DEFAULT_DAILY_STRUCTURE: List[str] = ["Morning", "Afternoon", "Evening"]
+
+ACTIVITY_LIBRARY: List[Dict[str, object]] = [
+    {
+        "name": "Iconic Museum Circuit",
+        "category": "Museums",
+        "description": "Guided highlights tour through the city's flagship museums with curated audio commentary.",
+        "ideal_slot": "Morning",
+        "duration_hours": 3,
+        "tags": {"indoor", "family", "accessible"},
+        "tip": "Reserve timed tickets to glide past the main queue.",
+    },
+    {
+        "name": "Boutique Gallery Crawl",
+        "category": "Museums",
+        "description": "Small contemporary galleries showcasing local artists with curator meet-and-greets.",
+        "ideal_slot": "Afternoon",
+        "duration_hours": 2,
+        "tags": {"indoor", "accessible", "quiet"},
+        "tip": "Bring a small notebook to capture artists you discover.",
+    },
+    {
+        "name": "Street Food Story",
+        "category": "Food & Cuisine",
+        "description": "Sample iconic bites across markets with a culinary historian explaining each dish.",
+        "ideal_slot": "Evening",
+        "duration_hours": 3,
+        "tags": {"outdoor", "budget", "walking", "spicy"},
+        "tip": "Carry reusable utensils to keep things eco-friendly.",
+    },
+    {
+        "name": "Chef's Table Showcase",
+        "category": "Food & Cuisine",
+        "description": "Tasting menu built around seasonal produce with an open kitchen conversation.",
+        "ideal_slot": "Evening",
+        "duration_hours": 3,
+        "tags": {"indoor", "premium", "accessible"},
+        "tip": "Share dietary notes ahead of time for thoughtful substitutions.",
+    },
+    {
+        "name": "Old Town Storywalk",
+        "category": "Historic Sites",
+        "description": "Narrated stroll through cobblestone quarters covering key milestones and legends.",
+        "ideal_slot": "Morning",
+        "duration_hours": 2,
+        "tags": {"outdoor", "walking"},
+        "tip": "Download the offline map in case cell service fades in narrow streets.",
+    },
+    {
+        "name": "Citadel Twilight Illumination",
+        "category": "Historic Sites",
+        "description": "Evening light show projected onto fortress walls with live orchestral score.",
+        "ideal_slot": "Evening",
+        "duration_hours": 2,
+        "tags": {"outdoor", "accessible", "family"},
+        "tip": "Arrive early for the accessible seating platform and headset commentary.",
+    },
+    {
+        "name": "Riverside Night Market",
+        "category": "Nightlife",
+        "description": "Open-air stalls, craft cocktails, and live acoustic sets under lantern-lit canopies.",
+        "ideal_slot": "Evening",
+        "duration_hours": 4,
+        "tags": {"outdoor", "budget", "family", "spicy"},
+        "tip": "Focus on stalls with the local slow-food certification badge.",
+    },
+    {
+        "name": "Jazz Lounge Residency",
+        "category": "Nightlife",
+        "description": "Speakeasy venue with rotating trios and zero-proof tasting flights for non-drinkers.",
+        "ideal_slot": "Night",
+        "duration_hours": 3,
+        "tags": {"indoor", "accessible", "quiet"},
+        "tip": "Book the early set for an intimate crowd and easier conversations.",
+    },
+    {
+        "name": "Forest Canopy Walk",
+        "category": "Nature",
+        "description": "Suspended trail system with wildlife interpreters and observation decks.",
+        "ideal_slot": "Morning",
+        "duration_hours": 3,
+        "tags": {"outdoor", "family", "high-energy"},
+        "tip": "Dress in layers; temperatures swing beneath the shade.",
+    },
+    {
+        "name": "Botanical Wellness Circuit",
+        "category": "Nature",
+        "description": "Mindful stroll through climate-controlled conservatories plus tea meditation.",
+        "ideal_slot": "Afternoon",
+        "duration_hours": 2,
+        "tags": {"indoor", "accessible", "quiet"},
+        "tip": "Reserve the guided aroma session for an extra restorative touch.",
+    },
+    {
+        "name": "Design District Studios",
+        "category": "Shopping",
+        "description": "Independent makers demo textiles, ceramics, and leatherwork with make-and-take moments.",
+        "ideal_slot": "Afternoon",
+        "duration_hours": 3,
+        "tags": {"indoor", "family", "budget"},
+        "tip": "Pack a foldable tote to support local artists without extra bags.",
+    },
+    {
+        "name": "Wellness Thermal Circuit",
+        "category": "Wellness",
+        "description": "Sensorial spa journey with hydrotherapy pools, salt rooms, and guided breathwork.",
+        "ideal_slot": "Morning",
+        "duration_hours": 3,
+        "tags": {"indoor", "accessible", "quiet"},
+        "tip": "Hydrate between circuits and plan a light brunch afterward.",
+    },
+    {
+        "name": "Rooftop Sunrise Flow",
+        "category": "Wellness",
+        "description": "Accessible sunrise yoga paired with local cold-pressed juices.",
+        "ideal_slot": "Morning",
+        "duration_hours": 1,
+        "tags": {"outdoor", "family", "budget"},
+        "tip": "Layers plus grip socks keep you comfortable even with early breeze.",
+    },
+    {
+        "name": "Harbor Kayak Quest",
+        "category": "Adventure",
+        "description": "Guided paddle past skyline views with floating coffee stop.",
+        "ideal_slot": "Afternoon",
+        "duration_hours": 3,
+        "tags": {"outdoor", "high-energy"},
+        "tip": "Dry bags are provided, but bring a change of clothes for post-paddle plans.",
+    },
+    {
+        "name": "Urban Art Bike Loop",
+        "category": "Adventure",
+        "description": "E-bike circuit connecting murals, creative hubs, and maker cafés.",
+        "ideal_slot": "Morning",
+        "duration_hours": 3,
+        "tags": {"outdoor", "family", "walking"},
+        "tip": "Select pedal-assist level 2 to keep the ride relaxed and conversation-friendly.",
+    },
+]
